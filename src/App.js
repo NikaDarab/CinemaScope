@@ -1,12 +1,12 @@
 import "./App.css";
 import { useState } from "react";
 import { fetchResults, fetchResult } from "./utils/api";
-import Modal from "./components/Modal";
+import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
-import Results from "./components/Results";
+import Cards from "./components/Cards";
 
 function App() {
-  const [data, setData] = useState(null);
+  const [movies, setMovies] = useState(null);
   const [movie, setMovie] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ function App() {
   const handleSearch = async (query) => {
     try {
       const results = await fetchResults(query);
-      setData(results);
+      setMovies(results);
     } catch (error) {
       setError(error.message);
     }
@@ -46,13 +46,9 @@ function App() {
         setQuery={setQuery}
         handleSearch={handleSearch}
       />
-      <Results error={error} data={data} setMovieDetails={setMovieDetails} />
+      <Cards error={error} movies={movies} setMovieDetails={setMovieDetails} />
       {showModal && movie && (
-        <Modal
-          movie={movie}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
+        <Card movie={movie} showModal={showModal} setShowModal={setShowModal} />
       )}
     </div>
   );

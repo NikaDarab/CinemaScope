@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Modal.css";
 import { useOutsideClickHandler } from "../utils/hooks";
 
-const Modal = ({ movie, showModal, setShowModal }) => {
+const Card = ({ movie, showModal, setShowModal }) => {
   const ref = useOutsideClickHandler(() => setShowModal(false));
 
   return (
@@ -42,4 +42,4 @@ const Modal = ({ movie, showModal, setShowModal }) => {
   );
 };
 
-export default Modal;
+export default Card;
