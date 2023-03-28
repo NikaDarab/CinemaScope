@@ -5,6 +5,7 @@ import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
 import Cards from "./components/Cards";
 import LandingPage from "./components/LandingPage";
+import Footer from "./components/Footer";
 
 function App() {
   const [movies, setMovies] = useState(null);
@@ -41,31 +42,34 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <SearchBar
-        query={query}
-        setQuery={setQuery}
-        handleSearch={handleSearch}
-      />
-      {movies ? (
-        <>
-          <Cards
-            error={error}
-            movies={movies}
-            setMovieDetails={setMovieDetails}
-          />
-          {showModal && movie && (
-            <Card
-              movie={movie}
-              showModal={showModal}
-              setShowModal={setShowModal}
+    <>
+      <div className="App">
+        <SearchBar
+          query={query}
+          setQuery={setQuery}
+          handleSearch={handleSearch}
+        />
+        {movies ? (
+          <>
+            <Cards
+              error={error}
+              movies={movies}
+              setMovieDetails={setMovieDetails}
             />
-          )}
-        </>
-      ) : (
-        <LandingPage />
-      )}
-    </div>
+            {showModal && movie && (
+              <Card
+                movie={movie}
+                showModal={showModal}
+                setShowModal={setShowModal}
+              />
+            )}
+          </>
+        ) : (
+          <LandingPage />
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 
