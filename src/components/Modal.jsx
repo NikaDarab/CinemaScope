@@ -7,7 +7,7 @@ const Modal = ({ movie, showModal, setShowModal }) => {
 
   return (
     <>
-      {showModal && movie && (
+      {showModal && (
         <div className="modal">
           <div className="modal-content" ref={ref}>
             <button
@@ -17,17 +17,24 @@ const Modal = ({ movie, showModal, setShowModal }) => {
             >
               &times;
             </button>
-            <h1>{movie.Title}</h1>
-            <img src={movie.Poster} alt={movie.Title} />
-            <p>{movie.Plot}</p>
-            <p>Director:{movie.Director}</p>
-            <p>Genre:{movie.Genre}</p>
-            <p>Release Date:{movie.Released}</p>
-            <p>IMDb Rating: {movie.imdbRating}</p>
-            <p>
-              Rotten Tomatoes:{" "}
-              {movie.Ratings.find((m) => m.Source === "Rotten Tomatoes").Value}
-            </p>
+            {movie && (
+              <>
+                <h1>{movie.Title}</h1>
+                <img src={movie.Poster} alt={movie.Title} />
+                <p>{movie.Plot}</p>
+                <p>Director:{movie.Director}</p>
+                <p>Genre:{movie.Genre}</p>
+                <p>Release Date:{movie.Released}</p>
+                <p>IMDb Rating: {movie.imdbRating}</p>
+                <p>
+                  Rotten Tomatoes:
+                  {
+                    movie.Ratings.find((m) => m.Source === "Rotten Tomatoes")
+                      .Value
+                  }
+                </p>
+              </>
+            )}
           </div>
         </div>
       )}

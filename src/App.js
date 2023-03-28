@@ -47,7 +47,7 @@ function App() {
         handleSearch={handleSearch}
       />
       <Results error={error} data={data} setMovieDetails={setMovieDetails} />
-      {showModal && (
+      {showModal && movie && (
         <Modal
           movie={movie}
           showModal={showModal}
