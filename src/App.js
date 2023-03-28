@@ -4,6 +4,7 @@ import { fetchResults, fetchResult } from "./utils/api";
 import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
 import Cards from "./components/Cards";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const [movies, setMovies] = useState(null);
@@ -46,9 +47,23 @@ function App() {
         setQuery={setQuery}
         handleSearch={handleSearch}
       />
-      <Cards error={error} movies={movies} setMovieDetails={setMovieDetails} />
-      {showModal && movie && (
-        <Card movie={movie} showModal={showModal} setShowModal={setShowModal} />
+      {movies ? (
+        <>
+          <Cards
+            error={error}
+            movies={movies}
+            setMovieDetails={setMovieDetails}
+          />
+          {showModal && movie && (
+            <Card
+              movie={movie}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          )}
+        </>
+      ) : (
+        <LandingPage />
       )}
     </div>
   );
