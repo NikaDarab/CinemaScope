@@ -1,7 +1,7 @@
 import axios from "axios";
 import { trimTitle } from "./helper";
 
-const API_KEY = process.env.REACT_APP_CINEMA_SCOPE_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const fetchResults = async (query) => {
   const trimmedTitle = trimTitle(query.title);
