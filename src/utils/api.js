@@ -16,7 +16,7 @@ export const fetchResults = async (query) => {
 };
 
 export const fetchResult = async (imdbID) => {
-  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`;
+  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}&plot=full`;
 
   try {
     const response = await axios.get(url);
