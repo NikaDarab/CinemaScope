@@ -5,14 +5,14 @@ import { trimTitle } from "./utils/helper";
 
 function App() {
   const [data, setData] = useState(null);
-
+  const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState({
     title: "",
     year: "",
   });
 
-  const fetchData = async (query) => {
+  const fetchResults = async (query) => {
     const trimmedTitle = trimTitle(query.title);
     await axios
       .get(
@@ -20,6 +20,17 @@ function App() {
       )
       .then((res) => {
         setData(res.data.Search);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  };
+
+  const fetchResult = async (IMDbID) => {
+    await axios
+      .get(`http://www.omdbapi.com/?apikey=e0a78b47&i=${IMDbID}`)
+      .then((res) => {
+        setMovie(res.data);
       })
       .catch((err) => {
         setError(err);
@@ -38,15 +49,18 @@ function App() {
         value={query.year}
         onChange={(e) => setQuery({ ...query, year: e.target.value })}
       />
-      <button onClick={() => fetchData(query)}>Search</button>
+      <button onClick={() => fetchResults(query)}>Search</button>
       <h1>Search Results</h1>
       <div>
         {error && <p>{error}</p>}
         {data?.map((result) => (
-          <div key={result.imdbID}>
-            <h3>{result.Title}</h3>
-            <p>{result.Year}</p>
-          </div>
+          <button
+            key={result.imdbID}
+            onClick={() => fetchResult(result.imdbID)}
+            style={{ border: "none", backgroundColor: "transparent" }}
+          >
+            {result.Title}
+          </button>
         ))}
       </div>
     </div>
