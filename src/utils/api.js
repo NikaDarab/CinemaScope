@@ -5,7 +5,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const fetchResults = async (query) => {
   const trimmedTitle = trimTitle(query.title);
-  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${trimmedTitle}&y=${query.year}`;
+  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${trimmedTitle}&y=${query.year}`;
 
   try {
     const response = await axios.get(url);
@@ -16,7 +16,7 @@ export const fetchResults = async (query) => {
 };
 
 export const fetchResult = async (imdbID) => {
-  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}&plot=full`;
+  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}&plot=full`;
 
   try {
     const response = await axios.get(url);

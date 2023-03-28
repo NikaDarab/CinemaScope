@@ -42,35 +42,32 @@ function App() {
   };
 
   return (
-    <>
-      <div className="App">
-        <SearchBar
-          query={query}
-          setQuery={setQuery}
-          handleSearch={handleSearch}
-        />
-        {movies ? (
-          <>
-            <Cards
-              error={error}
-              movies={movies}
-              setMovieDetails={setMovieDetails}
+    <div className="App">
+      <SearchBar
+        query={query}
+        setQuery={setQuery}
+        handleSearch={handleSearch}
+      />
+      {movies ? (
+        <>
+          <Cards
+            error={error}
+            movies={movies}
+            setMovieDetails={setMovieDetails}
+          />
+          {showModal && movie && (
+            <Card
+              movie={movie}
+              showModal={showModal}
+              setShowModal={setShowModal}
             />
-            {showModal && movie && (
-              <Card
-                movie={movie}
-                showModal={showModal}
-                setShowModal={setShowModal}
-              />
-            )}
-          </>
-        ) : (
-          <LandingPage />
-        )}
-         <Footer />
-      </div>
-     
-    </>
+          )}
+        </>
+      ) : (
+        <LandingPage />
+      )}
+       <Footer />
+    </div>
   );
 }
 
