@@ -14,7 +14,8 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
       />
       <input
         className="search-bar__input"
-        type="text"
+        type="number"
+        maxLength={4}
         value={query.year}
         onChange={(e) => setQuery({ ...query, year: e.target.value })}
         placeholder="Enter year (optional)"
