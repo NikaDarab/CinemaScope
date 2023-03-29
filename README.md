@@ -13,11 +13,9 @@ This React project allows users to search for and view information about movies 
 This project uses the Open Movie Database (OMDB) API to retrieve information about movies. The API provides two endpoints that this project consumes:
 
 http://www.omdbapi.com/?apikey=[yourkey]&: This endpoint is used to search for movies by title, and returns a list of movies that match the search query.
+
+
 http://img.omdbapi.com/?apikey=[yourkey]&: This endpoint is used to retrieve movie posters for each movie in the search results.
-
-To use the OMDB API in this project, I obtained an API key from the OMDB website. Once I received the API key, I included it in your requests by replacing [yourkey] with my actual API key.
-
-Note that the OMDB API has some usage restrictions, including a limit of 1000 requests per day for free accounts
 
 ## Installing
 
