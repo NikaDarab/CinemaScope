@@ -21,6 +21,7 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
       />
       <div className="search-buttons-wrapper">
         <button
+          data-testid="search-button"
           className={`search-bar__button ${
             query.title.length < 3 ? "search-bar__button--disabled" : ""
           }`}
@@ -30,6 +31,7 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
           Search
         </button>
         <button
+          data-testid="clear-button"
           className="clear-bar__button"
           onClick={clearResults}
           disabled={

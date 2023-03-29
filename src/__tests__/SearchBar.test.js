@@ -9,6 +9,7 @@ describe("SearchBar component", () => {
   };
   const setQuery = jest.fn();
   const handleSearch = jest.fn();
+  const clearResults = jest.fn();
 
   beforeEach(() => {
     // eslint-disable-next-line testing-library/no-render-in-setup
@@ -44,8 +45,14 @@ describe("SearchBar component", () => {
   });
 
   test("calls handleSearch with current query when clicking on search button", () => {
-    const searchButton = screen.getByRole("button", { name: "Search" });
+    const searchButton = screen.getByTestId("search-button");
     fireEvent.click(searchButton);
     expect(handleSearch).toHaveBeenCalledWith(query);
+  });
+
+  test("calls clearResults when clicking on clear button", () => {
+    const clearButton = screen.getByTestId("clear-button");
+    fireEvent.click(clearButton);
+    expect(clearResults).toHaveBeenCalled();
   });
 });
