@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Cinema Scope
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live app
 
-## Available Scripts
+[Cinema Scope](https://cinemascope.netlify.app/)
 
-In the project directory, you can run:
+## Summary
 
-### `npm start`
+This React project allows users to search for and view information about movies using the Open Movie Database (OMDB) API. Users can search for movies by title, and the app displays the results in a grid of movie posters. Clicking on a movie poster displays more information about the movie, including its title, release year, runtime, and plot summary.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This project uses the Open Movie Database (OMDB) API to retrieve information about movies. The API provides two endpoints that this project consumes:
 
-### `npm test`
+http://www.omdbapi.com/?apikey=[yourkey]&: This endpoint is used to search for movies by title, and returns a list of movies that match the search query.
+http://img.omdbapi.com/?apikey=[yourkey]&: This endpoint is used to retrieve movie posters for each movie in the search results.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To use the OMDB API in this project, I obtained an API key from the OMDB website. Once I received the API key, I included it in your requests by replacing [yourkey] with my actual API key.
 
-### `npm run build`
+Note that the OMDB API has some usage restrictions, including a limit of 1000 requests per day for free accounts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Clone the repository to your local machine
+- Run npm install to install the dependencies
+- Run npm start to start the development server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+This project was built using React and features the following functionality:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Movie search page
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The project includes a search page that allows users to search for movies using the OMDB API's "By Search" functionality. The search results are displayed in a grid format.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Movie details page
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The project includes a movie details page that allows users to click on a movie item from the search results to view the details of that movie. The details are retrieved from the OMDB API's "By ID" functionality.
 
-## Learn More
+### Multiple React components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The project uses multiple React components to organize and display the UI.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### State and props
 
-### Code Splitting
+The project uses both state and props to manage and pass data between components. useState hook is used to manage the state of certain components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Timeframe
 
-### Analyzing the Bundle Size
+This project took approximately X hours to complete, including the time spent on thinking, designing, implementing the solution and testing. The breakdown of the timeframe is as follows:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Thinking and planning
 
-### Making a Progressive Web App
+30 minutes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Designing
 
-### Advanced Configuration
+1 hour
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Implementation
 
-### Deployment
+4 hours
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Testing
 
-### `npm run build` fails to minify
+2 hours
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Authors
+
+Nika Darab
+
+## Acknowledgments
+
+Text-Em-All React Coding Challenge
+
+[Coding Challenge](https://github.com/callemall/tea-react-challenge#text-em-all-react-coding-challenge)
