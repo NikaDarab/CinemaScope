@@ -1,12 +1,17 @@
 # Cinema Scope
 
-## Live app
-
-[Cinema Scope](https://cinemascope.netlify.app/)
-
 ## Summary
 
 This React project allows users to search for and view information about movies using the Open Movie Database (OMDB) API. Users can search for movies by title, and the app displays the results in a grid of movie posters. Clicking on a movie poster displays more information about the movie, including its title, release year, runtime, and plot summary.
+
+## Live app
+
+[Cinema Scope](https://cinemascope.netlify.app/) 
+
+https://user-images.githubusercontent.com/43226446/228417750-be99316b-9ba9-4b0d-a7a7-3394f8f40d69.mp4
+
+https://user-images.githubusercontent.com/43226446/228417984-d71e97f9-9cc4-420c-8cf7-bfcf2e329776.mp4
+
 
 ## API
 
@@ -62,6 +67,12 @@ This project took approximately X hours to complete, including the time spent on
 ### Testing
 
 2 hours
+
+### Figuring out how to turn the video into a GIF
+
+More hourse than what I'd like to admit.
+
+
 
 ## Authors
 
