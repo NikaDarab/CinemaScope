@@ -50,7 +50,7 @@ The project uses both state and props to manage and pass data between components
 
 ## Timeframe
 
-This project took approximately X hours to complete, including the time spent on thinking, designing, implementing the solution and testing. The breakdown of the timeframe is as follows:
+This project took approximately 7 hours to complete, including the time spent on thinking, designing, implementing the solution and testing. The breakdown of the timeframe is as follows:
 
 ### Thinking and planning
 
@@ -58,7 +58,7 @@ This project took approximately X hours to complete, including the time spent on
 
 ### Designing
 
-1 hour
+30 minutes
 
 ### Implementation
 
