@@ -42,12 +42,20 @@ function App() {
     setShowModal(true);
   };
 
+  const clearResults = () => {
+    setMovies([]);
+    setQuery({ title: "", year: "" });
+  };
+
   return (
     <div className="App">
       <SearchBar
         query={query}
         setQuery={setQuery}
+        movies={movies}
+        setMovies={setMovies}
         handleSearch={handleSearch}
+        clearResults={clearResults}
       />
       {movies ? (
         <>
