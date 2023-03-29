@@ -6,19 +6,13 @@ This React project allows users to search for and view information about movies 
 
 ## Live app
 
-[Cinema Scope](https://cinemascope.netlify.app/) 
-
-https://user-images.githubusercontent.com/43226446/228417750-be99316b-9ba9-4b0d-a7a7-3394f8f40d69.mp4
-
-https://user-images.githubusercontent.com/43226446/228417984-d71e97f9-9cc4-420c-8cf7-bfcf2e329776.mp4
-
+[Cinema Scope](https://cinemascope.netlify.app/)
 
 ## API
 
 This project uses the Open Movie Database (OMDB) API to retrieve information about movies. The API provides two endpoints that this project consumes:
 
 http://www.omdbapi.com/?apikey=[yourkey]&: This endpoint is used to search for movies by title, and returns a list of movies that match the search query.
-
 
 http://img.omdbapi.com/?apikey=[yourkey]&: This endpoint is used to retrieve movie posters for each movie in the search results.
 
@@ -67,12 +61,6 @@ This project took approximately 7 hours to complete, including the time spent on
 ### Testing
 
 2 hours
-
-### Figuring out how to turn the video into a GIF
-
-More hourse than what I'd like to admit publicly.
-
-
 
 ## Authors
 
