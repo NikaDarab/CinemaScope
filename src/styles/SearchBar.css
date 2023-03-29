@@ -46,6 +46,12 @@
     background-color: #ff6a00;
 }
 
+.search-bar__button[disabled],
+.search-bar__button--disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 .search-bar__title {
     font-size: 1.5rem;
     margin: 0;
