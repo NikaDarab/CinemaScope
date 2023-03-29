@@ -26,12 +26,25 @@ const Card = ({ movie, showModal, setShowModal }) => {
                     <span className="detail-value">{movie.Director}</span>
                   </div>
                   <div className="movie-detail">
+                    <span className="detail-label">Actors:</span>
+                    <span className="detail-value">{movie.Actors}</span>
+                  </div>
+
+                  <div className="movie-detail">
                     <span className="detail-label">Genre:</span>
                     <span className="detail-value">{movie.Genre}</span>
                   </div>
                   <div className="movie-detail">
                     <span className="detail-label">Release Date:</span>
                     <span className="detail-value">{movie.Released}</span>
+                  </div>
+                  <div className="movie-detail">
+                    <span className="detail-label">Duration:</span>
+                    <span className="detail-value">{movie.Runtime}</span>
+                  </div>
+                  <div className="movie-detail">
+                    <span className="detail-label">Rated:</span>
+                    <span className="detail-value">{movie.Rated}</span>
                   </div>
                   <div className="movie-detail">
                     <span className="detail-label">IMDb Rating:</span>

@@ -51,7 +51,8 @@
 
 .movie-details {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: left;
 }
 
 .movie-detail {

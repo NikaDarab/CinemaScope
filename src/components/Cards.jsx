@@ -16,9 +16,15 @@ const Cards = ({ error, movies, setMovieDetails }) => (
         </div>
         <div className="card-body">
           <h2 className="card-title">{result.Title}</h2>
-          <p className="card-text">
-            <strong>Year:</strong> {result.Year}
-          </p>
+
+          <div className="card-text">
+            <div>
+              <strong>Year:</strong> {result.Year}
+            </div>
+            <div>
+              <strong>Type:</strong> {result.Type}
+            </div>
+          </div>
         </div>
       </div>
     ))}
@@ -43,6 +49,5 @@ Cards.defaultProps = {
   movies: [],
   setMovieDetails: () => {},
 };
-
 
 export default Cards;
