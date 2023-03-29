@@ -1,4 +1,5 @@
 import React from "react";
+import { string, shape, arrayOf, func } from "prop-types";
 import "../styles/Cards.css";
 
 const Cards = ({ error, movies, setMovieDetails }) => (
@@ -23,5 +24,25 @@ const Cards = ({ error, movies, setMovieDetails }) => (
     ))}
   </div>
 );
+
+Cards.propTypes = {
+  error: string,
+  movies: arrayOf(
+    shape({
+      imdbID: string,
+      Poster: string,
+      Title: string,
+      Year: string,
+    })
+  ),
+  setMovieDetails: func,
+};
+
+Cards.defaultProps = {
+  error: "",
+  movies: [],
+  setMovieDetails: () => {},
+};
+
 
 export default Cards;
