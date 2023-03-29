@@ -14,10 +14,16 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
       />
       <input
         className="search-bar__input"
-        type="number"
+        type="text"
         maxLength={4}
+        pattern="\d{4}"
         value={query.year}
-        onChange={(e) => setQuery({ ...query, year: e.target.value })}
+        onChange={(e) => {
+          const input = e.target.value;
+          // Only allow numbers and limit to 4 characters
+          const filteredInput = input.replace(/[^0-9]/g, "").slice(0, 4);
+          setQuery({ ...query, year: filteredInput });
+        }}
         placeholder="Enter year (optional)"
       />
       <div className="search-buttons-wrapper">
