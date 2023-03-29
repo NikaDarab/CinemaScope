@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { fetchResults, fetchResult } from "./utils/api";
+import { fetchData } from "./utils/api";
 import { string, shape } from "prop-types";
 import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
@@ -13,28 +13,38 @@ function App() {
   const [movie, setMovie] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
+  const [landingText, setLandingText] = useState(
+    `<h1>Welcome to Cinema Scope!</h1><p>Search for your favorite movies and discover new ones.</p>`
+  );
   const [query, setQuery] = useState({
     title: "",
     year: "",
   });
 
   const handleSearch = async (query) => {
-    try {
-      const results = await fetchResults(query);
-      setMovies(results);
-    } catch (error) {
-      setError(error.message);
+    const results = await fetchData({ query });
+    const { res, err } = results;
+
+    if (err) {
+      const errorText = `<h1>Sorry, we couldn't find any results for "${query.title}"</h1><p>Please try again.</p>`;
+      setLandingText(errorText);
+      setError(err);
+      setMovies(null);
+      return;
     }
+    setMovies(res);
+    setLandingText(null);
+    setError(null);
   };
 
   const handleSelect = async (imdbID) => {
-    try {
-      const result = await fetchResult(imdbID);
-      setMovie(result);
-      setShowModal(true);
-    } catch (error) {
-      setError(error.message);
+    const result = await fetchData({ imdbID });
+    const { res, err } = result;
+    if (err) {
+      return;
     }
+    setMovie(res);
+    setError(null);
   };
 
   const setMovieDetails = (imdbID) => {
@@ -72,7 +82,7 @@ function App() {
           )}
         </>
       ) : (
-        <LandingPage />
+        <LandingPage error={error} landingText={landingText} />
       )}
       <Footer />
     </div>

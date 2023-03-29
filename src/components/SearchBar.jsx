@@ -25,14 +25,16 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
             query.title.length < 3 ? "search-bar__button--disabled" : ""
           }`}
           onClick={() => handleSearch(query)}
-          disabled={query.title.length < 3}
+          disabled={query?.title?.length < 3}
         >
           Search
         </button>
         <button
           className="clear-bar__button"
           onClick={clearResults}
-          disabled={movies.length === 0}
+          disabled={
+            !movies?.length && !query.title?.length && !query?.year.length
+          }
         >
           Clear
         </button>
@@ -47,7 +49,6 @@ SearchBar.propTypes = {
   }).isRequired,
   setQuery: func.isRequired,
   movies: arrayOf(shape({})),
-  setMovies: func.isRequired,
   handleSearch: func.isRequired,
   clearResults: func.isRequired,
 };

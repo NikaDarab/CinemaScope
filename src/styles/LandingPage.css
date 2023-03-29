@@ -54,6 +54,12 @@
     background-color: #22b0e8;
 }
 
+.error {
+    color: #c9c6c6;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
 @media only screen and (max-width: 768px) {
     .landing-page h1 {
         font-size: 2rem;

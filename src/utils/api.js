@@ -3,25 +3,27 @@ import { trimTitle } from "./helper";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export const fetchResults = async (query) => {
-  const trimmedTitle = trimTitle(query.title);
-  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${trimmedTitle}&y=${query.year}`;
+export const fetchData = async ({ query, imdbID }) => {
+  let res = null;
+  let err = null;
+  const trimmedTitle = query ? trimTitle(query.title) : null;
+  const url = query
+    ? `https://www.omdbapi.com/?apikey=${API_KEY}&s=${trimmedTitle}&y=${query.year}`
+    : `https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}&plot=full`;
 
-  try {
-    const response = await axios.get(url);
-    return response.data.Search;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
+  await axios
+    .get(url)
+    .then((response) => {
+      res = response.data;
+      if (res.Response === "False") {
+        err = res.Error;
+        return;
+      }
+      res = query ? res.Search : res;
+    })
+    .catch((error) => {
+      err = error.message;
+    });
 
-export const fetchResult = async (imdbID) => {
-  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}&plot=full`;
-
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
+  return { res, err };
 };
