@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { fetchResults, fetchResult } from "./utils/api";
+import { string, shape } from "prop-types";
 import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
 import Cards from "./components/Cards";
@@ -70,5 +71,46 @@ function App() {
     </div>
   );
 }
+
+App.propTypes = {
+  query: shape({
+    title: string.isRequired,
+    year: string.isRequired,
+  }),
+  setQuery: shape({
+    setQuery: string.isRequired,
+  }),
+  handleSearch: shape({
+    handleSearch: string.isRequired,
+  }),
+  error: string,
+  movies: shape({
+    imdbID: string.isRequired,
+    Poster: string.isRequired,
+    Title: string.isRequired,
+    Type: string.isRequired,
+    Year: string.isRequired,
+  }),
+  setMovieDetails: shape({
+    setMovieDetails: string.isRequired,
+  }),
+  movie: shape({
+    Actors: string.isRequired,
+    Director: string.isRequired,
+    Genre: string.isRequired,
+    Plot: string.isRequired,
+    Poster: string.isRequired,
+    Runtime: string.isRequired,
+    Title: string.isRequired,
+    Writer: string.isRequired,
+    Year: string.isRequired,
+  }),
+  showModal: shape({
+    showModal: string.isRequired,
+  }),
+  setShowModal: shape({
+    setShowModal: string.isRequired,
+  }),
+};
 
 export default App;
