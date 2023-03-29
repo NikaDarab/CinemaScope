@@ -50,7 +50,7 @@ SearchBar.propTypes = {
   setQuery: func.isRequired,
   movies: arrayOf(shape({})),
   handleSearch: func.isRequired,
-  clearResults: func.isRequired,
+  clearResults: func,
 };
 
 SearchBar.defaultProps = {
@@ -59,6 +59,7 @@ SearchBar.defaultProps = {
     year: "",
   },
   movies: [],
+  clearResults: () => {},
 };
 
 export default SearchBar;
