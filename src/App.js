@@ -53,7 +53,6 @@ function App() {
         query={query}
         setQuery={setQuery}
         movies={movies}
-        setMovies={setMovies}
         handleSearch={handleSearch}
         clearResults={clearResults}
       />

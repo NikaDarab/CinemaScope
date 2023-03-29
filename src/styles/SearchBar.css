@@ -85,6 +85,13 @@
     cursor: not-allowed;
 }
 
+.search-buttons-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+}
 
 @media screen and (min-width: 768px) {
     .search-bar {
