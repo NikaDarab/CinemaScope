@@ -66,7 +66,7 @@ function App() {
       ) : (
         <LandingPage />
       )}
-       <Footer />
+      <Footer />
     </div>
   );
 }
