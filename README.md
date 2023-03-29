@@ -70,7 +70,7 @@ This project took approximately X hours to complete, including the time spent on
 
 ### Figuring out how to turn the video into a GIF
 
-More hourse than what I'd like to admit.
+More hourse than what I'd like to admit publicly.
 
 
 
