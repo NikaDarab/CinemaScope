@@ -3,8 +3,11 @@ import { string, arrayOf, shape, func, bool } from "prop-types";
 import "../styles/Card.css";
 import { useOutsideClickHandler } from "../utils/hooks";
 
-const Card = ({ movie, showModal, setShowModal }) => {
-  const ref = useOutsideClickHandler(() => setShowModal(false));
+const Card = ({ movie, setMovie, showModal, setShowModal }) => {
+  const ref = useOutsideClickHandler(() => {
+    setShowModal(false);
+    setMovie(null);
+  });
 
   return (
     <>
@@ -92,6 +95,7 @@ Card.propTypes = {
   }),
   showModal: bool.isRequired,
   setShowModal: func.isRequired,
+  setMovie: func.isRequired,
 };
 
 export default Card;

@@ -76,6 +76,7 @@ function App() {
           {showModal && movie && (
             <Card
               movie={movie}
+              setMovie={setMovie}
               showModal={showModal}
               setShowModal={setShowModal}
             />
