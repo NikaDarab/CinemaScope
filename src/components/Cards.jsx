@@ -21,7 +21,7 @@ const Cards = ({ movies, setShowModal, setMovie, setError, setLoading }) => (
       >
         <div className="card-img">
           <img
-            src={result.Poster ? result.Poster : "/no-image.webp"}
+            src={result.Poster === "N/A" ? "/no-image.webp" : result.Poster}
             alt={result.Title}
           />
         </div>
