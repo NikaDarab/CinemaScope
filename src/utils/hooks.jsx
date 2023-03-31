@@ -66,7 +66,7 @@ export const useInfiniteScroll = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  },  [hasMoreResults, loading, page, query, movies]);
+  },  [hasMoreResults, loading, page, query, movies, setLoading, fetchData, setMovies, setPage, setHasMoreResults, setError]);
 };
 
 export const setMovieDetails = ( imdbID, setShowModal, setMovie, setError, setLoading) => {
