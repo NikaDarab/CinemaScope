@@ -2,9 +2,8 @@ import React, { memo } from "react";
 import { string, shape, arrayOf, func } from "prop-types";
 import "../styles/Cards.css";
 
-const Cards = ({ error, movies, setMovieDetails }) => (
+const Cards = ({ movies, setMovieDetails }) => (
   <div className="card-container">
-    {error && <p>{error}</p>}
     {movies?.map((result, index) => (
       <div
         key={index}
@@ -32,7 +31,6 @@ const Cards = ({ error, movies, setMovieDetails }) => (
 );
 
 Cards.propTypes = {
-  error: string,
   movies: arrayOf(
     shape({
       imdbID: string,
@@ -45,7 +43,6 @@ Cards.propTypes = {
 };
 
 Cards.defaultProps = {
-  error: "",
   movies: [],
   setMovieDetails: () => {},
 };
