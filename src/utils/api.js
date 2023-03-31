@@ -28,3 +28,44 @@ export const fetchData = async ({ query, imdbID, page }) => {
 
   return { res, err, totalResults };
 };
+
+export const handleSearch = async (
+  query,
+  setMovies,
+  setLandingText,
+  setError,
+  setLoading,
+  setPage
+) => {
+  setLoading(true);
+  const results = await fetchData({ query: { ...query }, page: 1 });
+  const { res, err } = results;
+
+  if (err) {
+    const errorText = `<h1>Sorry, we couldn't find any results for "${query.title}"</h1><p>Please try again.</p>`;
+    setLandingText(errorText);
+    setError(err);
+    setMovies([]);
+    setLoading(false);
+    return;
+  }
+
+  setMovies(res);
+  setLandingText(null);
+  setError(null);
+  setPage(1);
+  setLoading(false);
+};
+
+export const handleSelect = async (imdbID, setMovie, setError, setLoading) => {
+  setLoading(true);
+  const result = await fetchData({ imdbID });
+  const { res, err } = result;
+  if (err) {
+    setLoading(false);
+    return;
+  }
+  setMovie(res);
+  setError(null);
+  setLoading(false);
+};

@@ -10,7 +10,11 @@ const LandingPage = ({ landingText }) => (
 );
 
 LandingPage.propTypes = {
-  landingText: string.isRequired,
+  landingText: string,
+};
+
+LandingPage.defaultProps = {
+  landingText: "",
 };
 
 export default LandingPage;

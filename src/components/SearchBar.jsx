@@ -1,8 +1,19 @@
 import React from "react";
+import { handleSearch } from "../utils/api";
+import { clearResults } from "../utils/hooks";
 import { string, func, shape, arrayOf } from "prop-types";
 import "../styles/SearchBar.css";
 
-const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
+const SearchBar = ({
+  query,
+  setQuery,
+  movies,
+  setMovies,
+  setLandingText,
+  setError,
+  setLoading,
+  setPage,
+}) => {
   return (
     <div className="search-bar">
       <input
@@ -32,7 +43,16 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
           className={`search-bar__button ${
             query.title.length < 3 ? "search-bar__button--disabled" : ""
           }`}
-          onClick={() => handleSearch(query)}
+          onClick={() =>
+            handleSearch(
+              query,
+              setMovies,
+              setLandingText,
+              setError,
+              setLoading,
+              setPage
+            )
+          }
           disabled={query?.title?.length < 3}
         >
           Search
@@ -40,7 +60,7 @@ const SearchBar = ({ query, setQuery, handleSearch, clearResults, movies }) => {
         <button
           data-testid="clear-button"
           className="clear-bar__button"
-          onClick={clearResults}
+          onClick={() => clearResults(setMovies, setQuery)}
           disabled={
             !movies?.length && !query.title?.length && !query?.year.length
           }
@@ -58,7 +78,6 @@ SearchBar.propTypes = {
   }).isRequired,
   setQuery: func.isRequired,
   movies: arrayOf(shape({})),
-  handleSearch: func.isRequired,
   clearResults: func,
 };
 

@@ -25,85 +25,19 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [hasMoreResults, setHasMoreResults] = useState(true);
 
-  useInfiniteScroll({ hasMoreResults, page, query, movies, setMovies, setPage, setLoading, setHasMoreResults, fetchData, setError });
-
-  // useEffect(() => {
-  //   const handleScroll = async () => {
-  //     if (
-  //       !hasMoreResults ||
-  //       window.innerHeight + window.scrollY < document.body.offsetHeight - 500
-  //     ) {
-  //       return;
-  //     }
-  //     const nextPage = page + 1;
-  //     setLoading(true);
-  //     const results = await fetchData({ query: { ...query }, page: nextPage });
-  //     const { res, err } = results;
-  //     if (err) {
-  //       setError(err);
-  //       setLoading(false);
-  //       return;
-  //     }
-  //     if (res.length === 0) {
-  //       setHasMoreResults(false);
-  //       return;
-  //     }
-  //     setMovies([...movies, ...res]);
-  //     setPage(nextPage);
-  //     setLoading(false);
-  //     setHasMoreResults(true);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [hasMoreResults, loading, page, query, movies]);
-
-  const handleSearch = async (query) => {
-    setLoading(true);
-    const results = await fetchData({ query: { ...query }, page: 1 });
-    const { res, err } = results;
-
-    if (err) {
-      const errorText = `<h1>Sorry, we couldn't find any results for "${query.title}"</h1><p>Please try again.</p>`;
-      setLandingText(errorText);
-      setError(err);
-      setMovies([]);
-      setLoading(false);
-      return;
-    }
-
-    setMovies(res);
-    setLandingText(null);
-    setError(null);
-    setPage(1);
-    setLoading(false);
-  };
-
-  const handleSelect = async (imdbID) => {
-    setLoading(true);
-    const result = await fetchData({ imdbID });
-    const { res, err } = result;
-    if (err) {
-      setLoading(false);
-      return;
-    }
-    setMovie(res);
-    setError(null);
-    setLoading(false);
-  };
-
-  const setMovieDetails = (imdbID) => {
-    handleSelect(imdbID);
-    setShowModal(true);
-  };
-
-  const clearResults = () => {
-    setMovies([]);
-    setQuery({ title: "", year: "" });
-  };
+  useInfiniteScroll({
+    hasMoreResults,
+    page,
+    query,
+    movies,
+    loading,
+    setMovies,
+    setPage,
+    setLoading,
+    setHasMoreResults,
+    fetchData,
+    setError,
+  });
 
   return (
     <div className="App">
@@ -111,15 +45,21 @@ function App() {
         query={query}
         setQuery={setQuery}
         movies={movies}
-        handleSearch={handleSearch}
-        clearResults={clearResults}
+        setMovies={setMovies}
+        setLandingText={setLandingText}
+        setError={setError}
+        setLoading={setLoading}
+        setPage={setPage}
       />
       {movies.length > 0 ? (
         <>
           <Cards
             error={error}
             movies={movies}
-            setMovieDetails={setMovieDetails}
+            setShowModal={setShowModal}
+            setMovie={setMovie}
+            setError={setError}
+            setLoading={setLoading}
           />
           {showModal && movie && (
             <Card

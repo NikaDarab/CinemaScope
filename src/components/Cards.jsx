@@ -1,14 +1,23 @@
 import React, { memo } from "react";
+import { setMovieDetails } from "../utils/hooks";
 import { string, shape, arrayOf, func } from "prop-types";
 import "../styles/Cards.css";
 
-const Cards = ({ movies, setMovieDetails }) => (
+const Cards = ({ movies, setShowModal, setMovie, setError, setLoading }) => (
   <div className="card-container">
     {movies?.map((result, index) => (
       <div
         key={index}
         className="card"
-        onClick={() => setMovieDetails(result.imdbID)}
+        onClick={() =>
+          setMovieDetails(
+            result.imdbID,
+            setShowModal,
+            setMovie,
+            setError,
+            setLoading
+          )
+        }
       >
         <div className="card-img">
           <img src={result.Poster} alt={result.Title} />

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { handleSelect } from "../utils/api";
 
 export const useOutsideClickHandler = (handler) => {
   const ref = useRef();
@@ -28,6 +29,7 @@ export const useInfiniteScroll = ({
   setMovies,
   setPage,
   setLoading,
+  loading,
   setHasMoreResults,
   fetchData,
   setError,
@@ -64,16 +66,15 @@ export const useInfiniteScroll = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [
-    hasMoreResults,
-    page,
-    query,
-    movies,
-    setLoading,
-    fetchData,
-    setMovies,
-    setPage,
-    setHasMoreResults,
-    setError,
-  ]);
+  },  [hasMoreResults, loading, page, query, movies]);
 };
+
+export const setMovieDetails = ( imdbID, setShowModal, setMovie, setError, setLoading) => {
+  handleSelect(imdbID, setMovie, setError, setLoading);
+  setShowModal(true);
+};
+
+export const clearResults = ( setMovies, setQuery) => {
+  setMovies([]);
+  setQuery({ title: "", year: "" });
+}
