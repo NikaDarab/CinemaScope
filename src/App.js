@@ -1,6 +1,7 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchData } from "./utils/api";
+import { useInfiniteScroll } from "./utils/hooks";
 import { string, shape, func } from "prop-types";
 import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
@@ -24,39 +25,41 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [hasMoreResults, setHasMoreResults] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = async () => {
-      if (
-        !hasMoreResults ||
-        window.innerHeight + window.scrollY < document.body.offsetHeight - 500
-      ) {
-        return;
-      }
-      const nextPage = page + 1;
-      setLoading(true);
-      const results = await fetchData({ query: { ...query }, page: nextPage });
-      const { res, err } = results;
-      if (err) {
-        setError(err);
-        setLoading(false);
-        return;
-      }
-      if (res.length === 0) {
-        setHasMoreResults(false);
-        return;
-      }
-      setMovies([...movies, ...res]);
-      setPage(nextPage);
-      setLoading(false);
-      setHasMoreResults(true);
-    };
+  useInfiniteScroll({ hasMoreResults, page, query, movies, setMovies, setPage, setLoading, setHasMoreResults, fetchData, setError });
 
-    window.addEventListener("scroll", handleScroll);
+  // useEffect(() => {
+  //   const handleScroll = async () => {
+  //     if (
+  //       !hasMoreResults ||
+  //       window.innerHeight + window.scrollY < document.body.offsetHeight - 500
+  //     ) {
+  //       return;
+  //     }
+  //     const nextPage = page + 1;
+  //     setLoading(true);
+  //     const results = await fetchData({ query: { ...query }, page: nextPage });
+  //     const { res, err } = results;
+  //     if (err) {
+  //       setError(err);
+  //       setLoading(false);
+  //       return;
+  //     }
+  //     if (res.length === 0) {
+  //       setHasMoreResults(false);
+  //       return;
+  //     }
+  //     setMovies([...movies, ...res]);
+  //     setPage(nextPage);
+  //     setLoading(false);
+  //     setHasMoreResults(true);
+  //   };
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasMoreResults, loading, page, query, movies]);
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [hasMoreResults, loading, page, query, movies]);
 
   const handleSearch = async (query) => {
     setLoading(true);

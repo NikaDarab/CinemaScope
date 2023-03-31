@@ -19,3 +19,61 @@ export const useOutsideClickHandler = (handler) => {
 
   return ref;
 };
+
+export const useInfiniteScroll = ({
+  hasMoreResults,
+  page,
+  query,
+  movies,
+  setMovies,
+  setPage,
+  setLoading,
+  setHasMoreResults,
+  fetchData,
+  setError,
+}) => {
+  useEffect(() => {
+    const handleScroll = async () => {
+      if (
+        !hasMoreResults ||
+        window.innerHeight + window.scrollY < document.body.offsetHeight - 500
+      ) {
+        return;
+      }
+      const nextPage = page + 1;
+      setLoading(true);
+      const results = await fetchData({ query: { ...query }, page: nextPage });
+      const { res, err } = results;
+      if (err) {
+        setError(err);
+        setLoading(false);
+        return;
+      }
+      if (res.length === 0) {
+        setHasMoreResults(false);
+        return;
+      }
+      setMovies([...movies, ...res]);
+      setPage(nextPage);
+      setLoading(false);
+      setHasMoreResults(true);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [
+    hasMoreResults,
+    page,
+    query,
+    movies,
+    setLoading,
+    fetchData,
+    setMovies,
+    setPage,
+    setHasMoreResults,
+    setError,
+  ]);
+};
