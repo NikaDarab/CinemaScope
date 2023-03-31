@@ -20,7 +20,10 @@ const Cards = ({ movies, setShowModal, setMovie, setError, setLoading }) => (
         }
       >
         <div className="card-img">
-          <img src={result.Poster} alt={result.Title} />
+          <img
+            src={result.Poster ? result.Poster : "/no-image.webp"}
+            alt={result.Title}
+          />
         </div>
         <div className="card-body">
           <h2 className="card-title">{result.Title}</h2>

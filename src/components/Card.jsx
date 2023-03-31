@@ -19,7 +19,11 @@ const Card = ({ movie, setMovie, showModal, setShowModal }) => {
                 <h2 className="movie-title">{movie.Title}</h2>
                 <img
                   className="movie-poster"
-                  src={movie.Poster}
+                  src={
+                    movie.Poster
+                      ? movie.Poster
+                      : "/movie-poster-placeholder.png"
+                  }
                   alt={movie.Title}
                 />
                 <p className="movie-plot">{movie.Plot}</p>
