@@ -16,7 +16,9 @@ export const fetchData = async ({ query, imdbID }) => {
     .get(url)
     .then((response) => {
       res = response.data;
-      pages = Math.ceil(res.totalResults / 10);
+      pages = Array.from(Array(Math.ceil(res.totalResults / 10)).keys()).map(
+        (i) => i + 1
+      );
       if (res.Response === "False") {
         err = res.Error;
         return;
