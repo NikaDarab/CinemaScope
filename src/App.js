@@ -1,7 +1,7 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchData } from "./utils/api";
-import { string, shape } from "prop-types";
+import { string, shape, func } from "prop-types";
 import Card from "./components/Card";
 import SearchBar from "./components/SearchBar";
 import Cards from "./components/Cards";
@@ -9,7 +9,8 @@ import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer";
 
 function App() {
-  const [movies, setMovies] = useState(null);
+  const [page, setPage] = useState(1);
+  const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
@@ -19,34 +20,76 @@ function App() {
   const [query, setQuery] = useState({
     title: "",
     year: "",
-    page:1,
   });
+  const [loading, setLoading] = useState(false);
+  const [hasMoreResults, setHasMoreResults] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = async () => {
+      if (
+        !hasMoreResults ||
+        window.innerHeight + window.scrollY < document.body.offsetHeight - 500
+      ) {
+        return;
+      }
+      const nextPage = page + 1;
+      setLoading(true);
+      const results = await fetchData({ query: { ...query }, page: nextPage });
+      const { res, err } = results;
+      if (err) {
+        setError(err);
+        setLoading(false);
+        return;
+      }
+      if (res.length === 0) {
+        setHasMoreResults(false);
+        return;
+      }
+      setMovies([...movies, ...res]);
+      setPage(nextPage);
+      setLoading(false);
+      setHasMoreResults(true);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [hasMoreResults, loading, page, query, movies]);
 
   const handleSearch = async (query) => {
-    const results = await fetchData({ query });
-    const { res, err, pages } = results;
+    setLoading(true);
+    const results = await fetchData({ query: { ...query }, page: 1 });
+    const { res, err } = results;
 
     if (err) {
       const errorText = `<h1>Sorry, we couldn't find any results for "${query.title}"</h1><p>Please try again.</p>`;
       setLandingText(errorText);
       setError(err);
-      setMovies(null);
+      setMovies([]);
+      setLoading(false);
       return;
     }
+
     setMovies(res);
     setLandingText(null);
     setError(null);
-    setQuery({ ...query, page: pages });
+    setPage(1);
+    setLoading(false);
   };
 
   const handleSelect = async (imdbID) => {
+    setLoading(true);
     const result = await fetchData({ imdbID });
     const { res, err } = result;
     if (err) {
+      setLoading(false);
       return;
     }
     setMovie(res);
     setError(null);
+    setLoading(false);
   };
 
   const setMovieDetails = (imdbID) => {
@@ -68,7 +111,7 @@ function App() {
         handleSearch={handleSearch}
         clearResults={clearResults}
       />
-      {movies ? (
+      {movies.length > 0 ? (
         <>
           <Cards
             error={error}
@@ -97,12 +140,8 @@ App.propTypes = {
     title: string.isRequired,
     year: string.isRequired,
   }),
-  setQuery: shape({
-    setQuery: string.isRequired,
-  }),
-  handleSearch: shape({
-    handleSearch: string.isRequired,
-  }),
+  setQuery: func,
+  handleSearch: func,
   error: string,
   movies: shape({
     imdbID: string.isRequired,
@@ -111,26 +150,20 @@ App.propTypes = {
     Type: string.isRequired,
     Year: string.isRequired,
   }),
-  setMovieDetails: shape({
-    setMovieDetails: string.isRequired,
-  }),
+  setMovieDetails: func,
   movie: shape({
     Actors: string.isRequired,
     Director: string.isRequired,
     Genre: string.isRequired,
-    Plot: string.isRequired,
+    Plot: string,
     Poster: string.isRequired,
     Runtime: string.isRequired,
     Title: string.isRequired,
     Writer: string.isRequired,
     Year: string.isRequired,
   }),
-  showModal: shape({
-    showModal: string.isRequired,
-  }),
-  setShowModal: shape({
-    setShowModal: string.isRequired,
-  }),
+  showModal: func,
+  setShowModal: func,
 };
 
 export default App;

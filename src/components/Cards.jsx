@@ -1,13 +1,13 @@
-import React, { memo }  from "react";
+import React, { memo } from "react";
 import { string, shape, arrayOf, func } from "prop-types";
 import "../styles/Cards.css";
 
 const Cards = ({ error, movies, setMovieDetails }) => (
   <div className="card-container">
     {error && <p>{error}</p>}
-    {movies?.map((result) => (
+    {movies?.map((result, index) => (
       <div
-        key={result.imdbID}
+        key={index}
         className="card"
         onClick={() => setMovieDetails(result.imdbID)}
       >
@@ -50,4 +50,4 @@ Cards.defaultProps = {
   setMovieDetails: () => {},
 };
 
-export default  memo(Cards);
+export default memo(Cards);
