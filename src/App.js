@@ -19,11 +19,12 @@ function App() {
   const [query, setQuery] = useState({
     title: "",
     year: "",
+    page:1,
   });
 
   const handleSearch = async (query) => {
     const results = await fetchData({ query });
-    const { res, err } = results;
+    const { res, err, pages } = results;
 
     if (err) {
       const errorText = `<h1>Sorry, we couldn't find any results for "${query.title}"</h1><p>Please try again.</p>`;
@@ -35,6 +36,7 @@ function App() {
     setMovies(res);
     setLandingText(null);
     setError(null);
+    setQuery({ ...query, page: pages });
   };
 
   const handleSelect = async (imdbID) => {

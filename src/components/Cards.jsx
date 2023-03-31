@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo }  from "react";
 import { string, shape, arrayOf, func } from "prop-types";
 import "../styles/Cards.css";
 
@@ -50,4 +50,4 @@ Cards.defaultProps = {
   setMovieDetails: () => {},
 };
 
-export default Cards;
+export default  memo(Cards);
