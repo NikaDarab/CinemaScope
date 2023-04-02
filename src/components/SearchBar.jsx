@@ -21,7 +21,7 @@ const SearchBar = ({
         type="text"
         value={query.title}
         onChange={(e) => setQuery({ ...query, title: e.target.value })}
-        placeholder="Enter movie title"
+        placeholder="Enter movie title (min 3 characters)"
       />
       <input
         className="search-bar__input"
